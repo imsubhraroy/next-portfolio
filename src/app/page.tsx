@@ -13,18 +13,22 @@ import Contact from "./components/contact";
 import Footer from "./components/footer";
 
 export default function Home() {
-  const [isDark, setIsDark] = useState(() => {
-  const saved = localStorage.getItem('theme');
-  return saved === 'true'; // Simple string comparison
-});
+  const [isDark, setIsDark] = useState(false);
 
-const toggleTheme = () => {
-  setIsDark(prevTheme => {
-    const newTheme = !prevTheme;
-    localStorage.setItem('theme', newTheme.toString());
-    return newTheme;
-  });
-};
+  useEffect(() => {
+    const saved = localStorage.getItem('theme');
+    if (saved) {
+      setIsDark(JSON.parse(saved));
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDark(prevTheme => {
+      const newTheme = !prevTheme;
+      localStorage.setItem('theme', newTheme.toString());
+      return newTheme;
+    });
+  };
 
   useEffect(() => {
     const scrollbarStyles = isDark ? `
