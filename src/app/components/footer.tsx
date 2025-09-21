@@ -80,7 +80,7 @@ export default function Footer({ isDarkMode }: Pick<HeaderInterface, 'isDarkMode
 
                                 {/* Links Section */}
                                 <div>
-                                    <h3 className={`text-xl font-bold mb-6 transition-colors duration-500 ${isDarkMode ? 'text-white' : 'text-gray-900'
+                                    <h3 className={`text-xl font-bold mb-6 transition-colors duration-500 pl-4 ${isDarkMode ? 'text-white' : 'text-gray-900'
                                         }`}>
                                         Links
                                     </h3>
@@ -96,7 +96,7 @@ export default function Footer({ isDarkMode }: Pick<HeaderInterface, 'isDarkMode
                                                 >
                                                     <ArrowRight
                                                         size={16}
-                                                        className={`mr-2 transition-all duration-300 ${hoveredLink === `links-${index}` ? 'translate-x-1 opacity-100' : 'opacity-0 -translate-x-2'
+                                                        className={` transition-all duration-300 ${hoveredLink === `links-${index}` ? 'translate-x-1 opacity-100' : 'opacity-0 -translate-x-2'
                                                             }`}
                                                     />
                                                     <span className={`transition-all duration-300 ${hoveredLink === `links-${index}` ? 'translate-x-2' : ''
@@ -111,7 +111,7 @@ export default function Footer({ isDarkMode }: Pick<HeaderInterface, 'isDarkMode
 
                                 {/* Services Section */}
                                 <div>
-                                    <h3 className={`text-xl font-bold mb-6 transition-colors duration-500 ${isDarkMode ? 'text-white' : 'text-gray-900'
+                                    <h3 className={`text-xl font-bold mb-6 transition-colors duration-500 pl-4 ${isDarkMode ? 'text-white' : 'text-gray-900'
                                         }`}>
                                         Services
                                     </h3>
@@ -127,7 +127,7 @@ export default function Footer({ isDarkMode }: Pick<HeaderInterface, 'isDarkMode
                                                 >
                                                     <ArrowRight
                                                         size={16}
-                                                        className={`mr-2 transition-all duration-300 ${hoveredLink === `services-${index}` ? 'translate-x-1 opacity-100' : 'opacity-0 -translate-x-2'
+                                                        className={`transition-all duration-300 ${hoveredLink === `services-${index}` ? 'translate-x-1 opacity-100' : 'opacity-0 -translate-x-2'
                                                             }`}
                                                     />
                                                     <span className={`transition-all duration-300 ${hoveredLink === `services-${index}` ? 'translate-x-2' : ''

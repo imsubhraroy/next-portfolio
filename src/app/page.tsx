@@ -13,13 +13,20 @@ import Contact from "./components/contact";
 import Footer from "./components/footer";
 
 export default function Home() {
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+  const saved = localStorage.getItem('theme');
+  return saved === 'true'; // Simple string comparison
+});
 
-  const toggleTheme = () => {
-    setIsDark(!isDark);
-  };
+const toggleTheme = () => {
+  setIsDark(prevTheme => {
+    const newTheme = !prevTheme;
+    localStorage.setItem('theme', newTheme.toString());
+    return newTheme;
+  });
+};
 
-    useEffect(() => {
+  useEffect(() => {
     const scrollbarStyles = isDark ? `
       ::-webkit-scrollbar {
         width: 12px;
@@ -106,17 +113,19 @@ export default function Home() {
   }, [isDark]);
 
   return (
-    <Header isDarkMode={isDark} setTheme={toggleTheme}>
-      <HeroSection isDarkMode={isDark} />
-      <About isDarkMode={isDark} />
-      <Education isDarkMode={isDark} />
-      <Experience isDarkMode={isDark} />
-      <Services isDarkMode={isDark} />
-      <Skills isDarkMode={isDark} />
-      <Projects isDarkMode={isDark} />
-      <Freelancing isDarkMode={isDark} />
-      <Contact isDarkMode={isDark} />
-      <Footer isDarkMode={isDark} />
-    </Header>
+    <div className="overflow-x-hidden" data-theme={isDark ? "dark" : "light"}>
+      <Header isDarkMode={isDark} setTheme={toggleTheme}>
+        <HeroSection isDarkMode={isDark} />
+        <About isDarkMode={isDark} />
+        <Education isDarkMode={isDark} />
+        <Experience isDarkMode={isDark} />
+        <Services isDarkMode={isDark} />
+        <Skills isDarkMode={isDark} />
+        <Projects isDarkMode={isDark} />
+        <Freelancing isDarkMode={isDark} />
+        <Contact isDarkMode={isDark} />
+        <Footer isDarkMode={isDark} />
+      </Header>
+    </div>
   );
 }
