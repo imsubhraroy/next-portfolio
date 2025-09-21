@@ -68,7 +68,7 @@ export default function Projects({ isDarkMode }: Pick<HeaderInterface, 'isDarkMo
                 <div className="container mx-auto px-6 py-16">
                     {/* Header with Theme Toggle */}
                     <div className="relative mb-16">
-                        <h1 className={`text-8xl md:text-9xl font-black text-center leading-none ${isDarkMode ? 'text-gray-800' : 'text-gray-200'
+                        <h1 className={`text-5xl lg:text-9xl font-black text-center leading-none ${isDarkMode ? 'text-gray-800' : 'text-gray-200'
                             } select-none`}>
                             Projects
                         </h1>
