@@ -23,10 +23,10 @@ export default function Footer({ isDarkMode }: Pick<HeaderInterface, 'isDarkMode
     };
 
     const socialLinks = [
-        { Icon: Linkedin, href: '#', color: 'hover:text-blue-500' },
-        { Icon: Github, href: '#', color: 'hover:text-gray-600' },
-        { Icon: Facebook, href: '#', color: 'hover:text-blue-600' },
-        { Icon: Instagram, href: '#', color: 'hover:text-pink-500' }
+        { Icon: Linkedin, href: 'https://www.linkedin.com/in/subhra-roy-984a1b243/', color: 'hover:text-blue-500' },
+        { Icon: Github, href: 'https://github.com/imsubhraroy', color: 'hover:text-gray-600' },
+        { Icon: Facebook, href: 'https://www.facebook.com/subhra.roy.3133719?mibextid=ZbWKwL', color: 'hover:text-blue-600' },
+        { Icon: Instagram, href: 'https://instagram.com/subhra9775?igshid=MzNlNGNkZWQ4Mg==', color: 'hover:text-pink-500' }
     ];
 
 
@@ -53,7 +53,7 @@ export default function Footer({ isDarkMode }: Pick<HeaderInterface, 'isDarkMode
                                     <div className="space-y-4">
                                         <p className={`leading-relaxed transition-all duration-500 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'
                                             }`}>
-                                            Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.
+                                            Thanks for scrolling this far — let’s build something amazing together. Always learning, always creating. From concepts to code, I bring ideas to life.
                                         </p>
 
                                         {/* Animated Social Links */}
@@ -62,6 +62,7 @@ export default function Footer({ isDarkMode }: Pick<HeaderInterface, 'isDarkMode
                                                 <a
                                                     key={index}
                                                     href={href}
+                                                    target="_blank"
                                                     className={`p-3 rounded-full transition-all duration-300 transform hover:scale-110 hover:-translate-y-1 ${isDarkMode
                                                         ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                                                         : 'bg-gray-200 text-gray-600 hover:bg-gray-300'

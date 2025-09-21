@@ -1,5 +1,5 @@
 'use client';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "./components/header";
 import HeroSection from "./components/heroSection";
 import About from "./components/about";
@@ -18,6 +18,92 @@ export default function Home() {
   const toggleTheme = () => {
     setIsDark(!isDark);
   };
+
+    useEffect(() => {
+    const scrollbarStyles = isDark ? `
+      ::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #1e293b;
+        border-radius: 6px;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #fbbf24, #f59e0b);
+        border-radius: 6px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: linear-gradient(135deg, #f59e0b, #d97706);
+        background-clip: content-box;
+      }
+      
+      ::-webkit-scrollbar-corner {
+        background: #1e293b;
+      }
+      
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #fbbf24 #1e293b;
+      }
+    ` : `
+      ::-webkit-scrollbar {
+        width: 12px;
+        height: 12px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 6px;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #6366f1;
+        border-radius: 6px;
+        border: 2px solid transparent;
+        background-clip: content-box;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: #4f46e5;
+        background-clip: content-box;
+      }
+      
+      ::-webkit-scrollbar-corner {
+        background: #f1f5f9;
+      }
+      
+      * {
+        scrollbar-width: thin;
+        scrollbar-color: #6366f1 #f1f5f9;
+      }
+    `;
+
+    // Remove existing scrollbar styles
+    const existingStyle = document.getElementById('custom-scrollbar-styles');
+    if (existingStyle) {
+      existingStyle.remove();
+    }
+
+    // Add new scrollbar styles
+    const styleElement = document.createElement('style');
+    styleElement.id = 'custom-scrollbar-styles';
+    styleElement.textContent = scrollbarStyles;
+    document.head.appendChild(styleElement);
+
+    // Cleanup function
+    return () => {
+      const styleToRemove = document.getElementById('custom-scrollbar-styles');
+      if (styleToRemove) {
+        styleToRemove.remove();
+      }
+    };
+  }, [isDark]);
 
   return (
     <Header isDarkMode={isDark} setTheme={toggleTheme}>
