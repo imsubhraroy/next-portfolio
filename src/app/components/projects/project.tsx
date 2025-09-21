@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 export default function Projects({ isDarkMode }: Pick<HeaderInterface, 'isDarkMode'>) {
-    const [hoveredCard, setHoveredCard] = useState(null);
+   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
     const projects = [
         {
