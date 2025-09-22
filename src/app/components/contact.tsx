@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 import type { HeaderInterface } from "../interfaces/headerInterFace";
 import { CheckCircle, Clock, Globe, Mail, MapPin, MessageCircle, Phone, Send, User, Wrench } from "lucide-react";
 import { useForm, ValidationError } from "@formspree/react";
@@ -8,29 +8,27 @@ export default function Contact({ isDarkMode }: Pick<HeaderInterface, 'isDarkMod
     const [state, handleSubmit] = useForm("xknlnwzy");
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    useEffect(() => {
-        if (state.succeeded) {
+    const formRef = useRef<HTMLFormElement>(null);
+
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        await handleSubmit(e);
+        if (state) {
             setIsSubmitted(true);
-        }
-    }, [state.succeeded]);
-
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        handleSubmit(e).then(() => {
-            if (state.succeeded) {
-                e.currentTarget.reset(); // ✅ clears the form
+            // Reset form immediately when submission succeeds
+            if (formRef.current) {
+                formRef.current.reset();
             }
-        });
-    };
 
-    if (isSubmitted) {
-        const form = document.getElementById("myForm");
-        if (form instanceof HTMLFormElement) {
-            form.reset();
+            // Reset the submitted state after 3 seconds
+            const timer = setTimeout(() => {
+                setIsSubmitted(false);
+            }, 3000);
+
+            return () => clearTimeout(timer);
         }
-        setTimeout(() => {
-            setIsSubmitted(false);
-        }, 3000);
-    }
+
+    };
 
     const contactInfo = [
         {
@@ -155,7 +153,7 @@ export default function Contact({ isDarkMode }: Pick<HeaderInterface, 'isDarkMod
                         {/* Contact Form */}
                         <div className="space-y-8">
                             <div className={`p-8 rounded-3xl ${isDarkMode ? 'bg-gray-800/50 border-gray-700/50' : 'bg-white/80 border-gray-200'} backdrop-blur-sm border shadow-2xl`}>
-                                <form onSubmit={onSubmit} id="myForm">
+                                <form onSubmit={onSubmit} id="myForm" ref={formRef}>
                                     <div className="space-y-6">
                                         <input
                                             name="name"
@@ -292,6 +290,6 @@ export default function Contact({ isDarkMode }: Pick<HeaderInterface, 'isDarkMod
         }
       `}</style>
             </div>
-        </div>
+        </div >
     )
 }

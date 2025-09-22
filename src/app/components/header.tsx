@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Moon, Sun, Menu, X } from 'lucide-react';
 import type { HeaderInterface } from '../interfaces/headerInterFace';
-import { log } from 'console';
+import Image from 'next/image';
 
 const Header: React.FC<HeaderInterface> = ({ isDarkMode, setTheme, children }) => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -55,7 +55,13 @@ const Header: React.FC<HeaderInterface> = ({ isDarkMode, setTheme, children }) =
                         <div className="flex-shrink-0">
                             <h1 className="text-2xl font-bold text-gray-900 dark:text-white tracking-wider">
                                 <span className='flex justify-center items-center'>
-                                    <img className='w-16 h-16' src='/logo.png'></img> SUBHRA
+                                    <Image
+                                        src="/logo.png"
+                                        alt="Logo"
+                                        width={64}   // w-16 → 64px
+                                        height={64}  // h-16 → 64px
+                                        className="w-16 h-16"
+                                    /> SUBHRA
                                 </span>
                             </h1>
                         </div>

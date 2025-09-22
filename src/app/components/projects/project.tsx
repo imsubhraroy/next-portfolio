@@ -5,7 +5,7 @@ import { useState } from "react";
 
 
 export default function Projects({ isDarkMode }: Pick<HeaderInterface, 'isDarkMode'>) {
-   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+    const [hoveredCard, setHoveredCard] = useState<number | null>(null);
 
     const projects = [
         {
@@ -94,9 +94,12 @@ export default function Projects({ isDarkMode }: Pick<HeaderInterface, 'isDarkMo
                             >
                                 {/* Card Container */}
                                 <div className={`
-                relative h-80 rounded-3xl overflow-hidden cursor-pointer
+                relative h-80 sm:h-80 md:h-80 lg:h-80 rounded-3xl overflow-hidden cursor-pointer
                 transform transition-all duration-500 ease-out
-                ${hoveredCard === project.id ? 'scale-105 -translate-y-2' : 'scale-100'}
+                ${hoveredCard === project.id
+                                        ? 'scale-100 sm:scale-105 translate-y-0 sm:-translate-y-2 z-50'
+                                        : 'scale-100 z-10'
+                                    }
                 ${project.bgColor}
                 border border-gray-200/50 dark:border-gray-700/50
                 shadow-lg hover:shadow-2xl
@@ -112,14 +115,14 @@ export default function Projects({ isDarkMode }: Pick<HeaderInterface, 'isDarkMo
 
                                     {/* Content Overlay - Default State */}
                                     <div className={`
-                  absolute inset-0 p-8 flex flex-col justify-center items-center text-center
+                  absolute inset-0 p-6 sm:p-8 flex flex-col justify-center items-center text-center
                   transition-all duration-500 ease-out
                   ${hoveredCard === project.id ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}
                 `}>
-                                        <div className="text-6xl mb-4 ">
+                                        <div className="text-4xl sm:text-6xl mb-4 ">
                                             {project.image}
                                         </div>
-                                        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                                        <h3 className="text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
                                             {project.title}
                                         </h3>
                                         <p className="text-gray-600 dark:text-gray-300 text-sm">
@@ -129,7 +132,7 @@ export default function Projects({ isDarkMode }: Pick<HeaderInterface, 'isDarkMo
 
                                     {/* Content Overlay - Hover State */}
                                     <div className={`
-                  absolute inset-0 p-8 flex flex-col justify-between
+                  absolute inset-0 p-4 sm:p-6 md:p-8 flex flex-col justify-between
                   bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm
                   transition-all duration-500 ease-out
                   ${hoveredCard === project.id ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4'}
@@ -137,28 +140,28 @@ export default function Projects({ isDarkMode }: Pick<HeaderInterface, 'isDarkMo
 
                                         {/* Top Section */}
                                         <div>
-                                            <div className="flex items-center gap-3 mb-4">
-                                                <div className={`p-3 rounded-xl bg-gradient-to-r ${project.gradient}`}>
-                                                    <project.icon className="w-6 h-6 text-white" />
+                                            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                                                <div className={`p-2 sm:p-3 rounded-xl bg-gradient-to-r ${project.gradient}`}>
+                                                    <project.icon className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                                                 </div>
                                                 <div>
-                                                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                                                    <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white leading-tight">
                                                         {project.title}
                                                     </h3>
-                                                    <span className="text-sm text-gray-500 dark:text-gray-400">
+                                                    <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                                                         {project.category}
                                                     </span>
                                                 </div>
                                             </div>
 
-                                            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
+                                            <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4 line-clamp-3">
                                                 {project.description}
                                             </p>
 
                                             {/* Tech Stack */}
-                                            <div className="flex flex-wrap gap-2 mb-6">
+                                            <div className="flex flex-wrap gap-1 sm:gap-2 mb-4 sm:mb-6">
                                                 {project.tech.map((tech, i) => (
-                                                    <span key={i} className="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded-full font-medium">
+                                                    <span key={i} className="px-2 sm:px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs rounded-full font-medium">
                                                         {tech}
                                                     </span>
                                                 ))}
@@ -166,13 +169,15 @@ export default function Projects({ isDarkMode }: Pick<HeaderInterface, 'isDarkMo
                                         </div>
 
                                         {/* Bottom Section - Action Buttons */}
-                                        <div className="flex gap-3">
-                                            <a className="flex-1 flex items-center justify-center gap-2 py-3 px-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold text-sm hover:shadow-lg transform hover:scale-105 transition-all duration-300" href={project.demoUrl} target="_blank">
-                                                <ExternalLink className="w-4 h-4" />
-                                                View Demo
+                                        <div className="flex gap-2 sm:gap-3">
+                                            <a className="flex-1 flex items-center justify-center gap-1 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-xl font-semibold text-xs sm:text-sm hover:shadow-lg transform hover:scale-105 transition-all duration-300" href={project.demoUrl} target="_blank">
+                                                <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
+                                                <span className="hidden xs:inline">View Demo</span>
+                                                <span className="xs:hidden">Demo</span>
                                             </a>
-                                            <a className="flex items-center justify-center gap-2 py-3 px-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-semibold text-sm hover:shadow-lg transform hover:scale-105 transition-all duration-300" href={project.githubUrl} target="_blank">
-                                                <Github className="w-4 h-4" />
+                                            <a className="flex items-center justify-center gap-1 sm:gap-2 py-2.5 sm:py-3 px-3 sm:px-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-semibold text-xs sm:text-sm hover:shadow-lg transform hover:scale-105 transition-all duration-300" href={project.githubUrl} target="_blank">
+                                                <Github className="w-3 h-3 sm:w-4 sm:h-4" />
+                                                <span className="hidden sm:inline">Code</span>
                                             </a>
                                         </div>
                                     </div>
@@ -189,13 +194,13 @@ export default function Projects({ isDarkMode }: Pick<HeaderInterface, 'isDarkMo
                         ))}
                     </div>
 
-                    {/* Floating Elements */}
-                    <div className="fixed top-20 left-10 w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-20 animate-pulse" />
-                    <div className="fixed bottom-20 right-10 w-16 h-16 bg-gradient-to-r from-pink-400 to-red-500 rounded-full opacity-20 animate-bounce" />
-                    <div className="fixed top-1/2 left-5 w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full opacity-20 animate-ping" />
+                    {/* Floating Elements - Hidden on small screens to reduce clutter */}
+                    <div className="hidden md:block fixed top-20 left-10 w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-500 rounded-full opacity-20 animate-pulse" />
+                    <div className="hidden md:block fixed bottom-20 right-10 w-16 h-16 bg-gradient-to-r from-pink-400 to-red-500 rounded-full opacity-20 animate-bounce" />
+                    <div className="hidden md:block fixed top-1/2 left-5 w-12 h-12 bg-gradient-to-r from-green-400 to-blue-500 rounded-full opacity-20 animate-ping" />
                 </div>
 
-                <style >{`
+                <style>{`
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -204,6 +209,31 @@ export default function Projects({ isDarkMode }: Pick<HeaderInterface, 'isDarkMo
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+        
+        .line-clamp-3 {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+        }
+        
+        @media (max-width: 640px) {
+          .xs\\:hidden {
+            display: none;
+          }
+          .xs\\:inline {
+            display: inline;
+          }
+        }
+        
+        @media (min-width: 641px) {
+          .xs\\:hidden {
+            display: inline;
+          }
+          .xs\\:inline {
+            display: none;
           }
         }
       `}</style>

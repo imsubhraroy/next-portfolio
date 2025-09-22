@@ -117,7 +117,7 @@ export default function Home() {
   }, [isDark]);
 
   return (
-    <div className="overflow-x-hidden" data-theme={isDark ? "dark" : "light"}>
+    <div className="" data-theme={isDark ? "dark" : "light"}>
       <Header isDarkMode={isDark} setTheme={toggleTheme}>
         <HeroSection isDarkMode={isDark} />
         <About isDarkMode={isDark} />
